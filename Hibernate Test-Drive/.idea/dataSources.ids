@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Data Source" product="Oracle" version="Oracle Database 11g Express Edition Release 11.2.0.2.0 - Production" jdbc-version="11.2" driver-name="Oracle JDBC driver" driver-version="11.2.0.3.0" uuid="4ead1a7f-8e9f-4f78-9ec1-c11e8b968e72">
+    <extra-name-characters>$#</extra-name-characters>
+    <identifier-quote-string>"</identifier-quote-string>
+    <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+    <jdbc-url>jdbc:oracle:thin:@//localhost:1521/xe</jdbc-url>
+    <user-name>metamodel_user</user-name>
+    <user-password>dfc7dfcfdfdedfcbdfc7dfc5dfcedfcfdfc6dff5dfdfdfd9dfcfdfd8</user-password>
+    <schema-pattern>*.DB_ALEX</schema-pattern>
+    <default-schemas>*.DB_ALEX</default-schemas>
+    <default-dialect>Oracle</default-dialect>
+    <libraries>
+      <library>
+        <url>jar://$PROJECT_DIR$/lib/ojdbc6-11.2.0.3_2.jar!/</url>
+      </library>
+      <library>
+        <url>file://$PROJECT_DIR$/lib/oracle-driver-license.txt</url>
+      </library>
+    </libraries>
+    <schema name="DB_ALEX" catalog="" />
+    <table name="ATTRIBUTES" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="ATTR_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="NAME" sqlType="VARCHAR2" length="255" precision="0" nullable="false" jdbcType="12" />
+      <column name="ATTR_TYPE_ID" sqlType="NUMBER" length="2" precision="0" nullable="false" jdbcType="3" />
+      <column name="PROPERTIES" sqlType="VARCHAR2" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="FLAGS" sqlType="NUMBER" length="10" precision="0" nullable="true" jdbcType="3" />
+      <primary-key name="PK_ATTRIBUTES" columns="ATTR_ID" />
+      <foreign-key name="FK_ATTR_TYPE" columns="ATTR_TYPE_ID" ref-table="ATTR_TYPES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="TYPE_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <exported-key name="FK_ATTR" table="ATTR_OBJECT_TYPES" schema="DB_ALEX" catalog="" columns="ATTR_ID" />
+      <exported-key name="FK_GRANTS_ATTR" table="GRANTS" schema="DB_ALEX" catalog="" columns="ATTR_ID" />
+      <exported-key name="FK_PAR_ATTR_ID" table="PARAMS" schema="DB_ALEX" catalog="" columns="ATTR_ID" />
+      <exported-key name="FK_REF_ATTR_ID" table="REFERENCES" schema="DB_ALEX" catalog="" columns="ATTR_ID" />
+    </table>
+    <table name="ATTR_OBJECT_TYPES" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="OBJECT_TYPE_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="ATTR_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="FLAGS" sqlType="NUMBER" length="10" precision="0" nullable="true" jdbcType="3" />
+      <primary-key name="PK_ATTR_OBJECT_TYPES" columns="ATTR_ID,OBJECT_TYPE_ID" />
+      <foreign-key name="FK_ATTR" columns="ATTR_ID" ref-table="ATTRIBUTES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="ATTR_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_TYPE" columns="OBJECT_TYPE_ID" ref-table="OBJECT_TYPES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="TYPE_ID" update-rule="0" delete-rule="0" deferrability="2" />
+    </table>
+    <table name="ATTR_TYPES" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="TYPE_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="NAME" sqlType="VARCHAR2" length="255" precision="0" nullable="false" jdbcType="12" />
+      <column name="DESCR" sqlType="VARCHAR2" length="255" precision="0" nullable="true" jdbcType="12" />
+      <primary-key name="PK_ATTR_TYPES" columns="TYPE_ID" />
+      <exported-key name="FK_ATTR_TYPE" table="ATTRIBUTES" schema="DB_ALEX" catalog="" columns="ATTR_TYPE_ID" />
+    </table>
+    <table name="GRANTS" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="OBJECT_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="ATTR_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="OBJECT_TYPE_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="GRANTS" sqlType="NUMBER" length="10" precision="0" nullable="false" jdbcType="3" />
+      <column name="USER_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <primary-key name="PK_GRANTS" columns="ATTR_ID,GRANTS,OBJECT_ID,OBJECT_TYPE_ID,USER_ID" />
+      <foreign-key name="FK_GRANTS_ATTR" columns="ATTR_ID" ref-table="ATTRIBUTES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="ATTR_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_GRANTS_USER_ID" columns="USER_ID" ref-table="OBJECTS" ref-schema="DB_ALEX" ref-catalog="" ref-columns="OBJECT_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_GRANTS_OBJECTS_OBJECT_ID" columns="OBJECT_ID" ref-table="OBJECTS" ref-schema="DB_ALEX" ref-catalog="" ref-columns="OBJECT_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_GRANTS_OT" columns="OBJECT_TYPE_ID" ref-table="OBJECT_TYPES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="TYPE_ID" update-rule="0" delete-rule="0" deferrability="2" />
+    </table>
+    <table name="OBJECTS" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="OBJECT_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="OBJECT_TYPE_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="NAME" sqlType="VARCHAR2" length="255" precision="0" nullable="false" jdbcType="12" />
+      <column name="ORDER_NUMBER" sqlType="NUMBER" length="10" precision="0" nullable="true" jdbcType="3" />
+      <column name="PARENT_ID" sqlType="NUMBER" length="20" precision="0" nullable="true" jdbcType="3" />
+      <column name="DESCR" sqlType="VARCHAR2" length="255" precision="0" nullable="true" jdbcType="12" />
+      <primary-key name="PK_OBJECTS" columns="OBJECT_ID" />
+      <foreign-key name="FK_PARENT" columns="PARENT_ID" ref-table="OBJECTS" ref-schema="DB_ALEX" ref-catalog="" ref-columns="OBJECT_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_TYPE_ID" columns="OBJECT_TYPE_ID" ref-table="OBJECT_TYPES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="TYPE_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <exported-key name="FK_GRANTS_OBJECTS_OBJECT_ID" table="GRANTS" schema="DB_ALEX" catalog="" columns="OBJECT_ID" />
+      <exported-key name="FK_GRANTS_USER_ID" table="GRANTS" schema="DB_ALEX" catalog="" columns="USER_ID" />
+      <exported-key name="FK_PARENT" table="OBJECTS" schema="DB_ALEX" catalog="" columns="PARENT_ID" />
+      <exported-key name="FK_PAR_OBJ_ID" table="PARAMS" schema="DB_ALEX" catalog="" columns="OBJECT_ID" />
+      <exported-key name="FK_REF_OBJ_ID_REF" table="REFERENCES" schema="DB_ALEX" catalog="" columns="REFERENCE" />
+      <exported-key name="FK_REF_OBJ_ID" table="REFERENCES" schema="DB_ALEX" catalog="" columns="OBJECT_ID" />
+    </table>
+    <table name="OBJECT_TYPES" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="TYPE_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="NAME" sqlType="VARCHAR2" length="255" precision="0" nullable="false" jdbcType="12" />
+      <column name="DESCR" sqlType="VARCHAR2" length="255" precision="0" nullable="true" jdbcType="12" />
+      <primary-key name="PK_OBJECT_TYPES" columns="TYPE_ID" />
+      <exported-key name="FK_TYPE" table="ATTR_OBJECT_TYPES" schema="DB_ALEX" catalog="" columns="OBJECT_TYPE_ID" />
+      <exported-key name="FK_GRANTS_OT" table="GRANTS" schema="DB_ALEX" catalog="" columns="OBJECT_TYPE_ID" />
+      <exported-key name="FK_TYPE_ID" table="OBJECTS" schema="DB_ALEX" catalog="" columns="OBJECT_TYPE_ID" />
+    </table>
+    <table name="PARAMS" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="OBJECT_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="ATTR_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="VALUE" sqlType="VARCHAR2" length="4000" precision="0" nullable="false" jdbcType="12" />
+      <column name="DATE_VALUE" sqlType="DATE" length="7" precision="0" nullable="false" jdbcType="93" />
+      <column name="SHOW_ORDER" sqlType="NUMBER" length="6" precision="0" nullable="false" jdbcType="3" />
+      <primary-key name="PK_PARAMS" columns="ATTR_ID,DATE_VALUE,OBJECT_ID,SHOW_ORDER,VALUE" />
+      <foreign-key name="FK_PAR_ATTR_ID" columns="ATTR_ID" ref-table="ATTRIBUTES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="ATTR_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_PAR_OBJ_ID" columns="OBJECT_ID" ref-table="OBJECTS" ref-schema="DB_ALEX" ref-catalog="" ref-columns="OBJECT_ID" update-rule="0" delete-rule="0" deferrability="2" />
+    </table>
+    <table name="REFERENCES" schema="DB_ALEX" catalog="" type="TABLE">
+      <column name="OBJECT_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="ATTR_ID" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="REFERENCE" sqlType="NUMBER" length="20" precision="0" nullable="false" jdbcType="3" />
+      <column name="SHOW_ORDER" sqlType="NUMBER" length="6" precision="0" nullable="false" jdbcType="3" />
+      <primary-key name="PK_REFERENCES" columns="ATTR_ID,OBJECT_ID,REFERENCE,SHOW_ORDER" />
+      <foreign-key name="FK_REF_ATTR_ID" columns="ATTR_ID" ref-table="ATTRIBUTES" ref-schema="DB_ALEX" ref-catalog="" ref-columns="ATTR_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_REF_OBJ_ID" columns="OBJECT_ID" ref-table="OBJECTS" ref-schema="DB_ALEX" ref-catalog="" ref-columns="OBJECT_ID" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="FK_REF_OBJ_ID_REF" columns="REFERENCE" ref-table="OBJECTS" ref-schema="DB_ALEX" ref-catalog="" ref-columns="OBJECT_ID" update-rule="0" delete-rule="1" deferrability="2" />
+    </table>
+  </data-source>
+</component>
