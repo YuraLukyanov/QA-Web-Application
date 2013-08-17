@@ -41,18 +41,18 @@ public class AttrObjectTypePK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AttrObjectTypePK that = (AttrObjectTypePK) o;
+        AttrObjectType that = (AttrObjectType) o;
 
-        if (attrId != null ? !attrId.equals(that.attrId) : that.attrId != null) return false;
-        if (objectTypeId != null ? !objectTypeId.equals(that.objectTypeId) : that.objectTypeId != null) return false;
+        if (!attrId.equals(that.getAttrId())) return false;
+        if (!objectTypeId.equals(that.getObjectTypeId())) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = objectTypeId != null ? objectTypeId.hashCode() : 0;
-        result = 31 * result + (attrId != null ? attrId.hashCode() : 0);
+        int result = objectTypeId.hashCode();
+        result = 31 * result + attrId.hashCode();
         return result;
     }
 }

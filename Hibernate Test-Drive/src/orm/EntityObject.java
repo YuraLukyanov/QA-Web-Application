@@ -10,9 +10,9 @@ import java.util.Collection;
  * Time: 16:16
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "OBJECTS", schema = "DB_ALEX", catalog = "")
+@Table(name = "OBJECTS", schema = "system", catalog = "")
 @Entity
-@javax.persistence.SequenceGenerator(
+@SequenceGenerator(
     name="SEQ_STORE",
     sequenceName="ENTITY_OBJECTS_SEQ",
     allocationSize=1
@@ -20,7 +20,7 @@ import java.util.Collection;
 public class EntityObject {
     private Integer objectId;
 
-    @javax.persistence.Column(name = "OBJECT_ID", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @Column(name = "OBJECT_ID", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "SEQ_STORE")
     public Integer getObjectId() {
@@ -33,7 +33,7 @@ public class EntityObject {
 
     private String name;
 
-    @javax.persistence.Column(name = "NAME", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Column(name = "NAME", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     @Basic
     public String getName() {
         return name;
@@ -45,7 +45,7 @@ public class EntityObject {
 
     private Integer orderNumber;
 
-    @javax.persistence.Column(name = "ORDER_NUMBER", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "ORDER_NUMBER", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public Integer getOrderNumber() {
         return orderNumber;
@@ -55,40 +55,33 @@ public class EntityObject {
         this.orderNumber = orderNumber;
     }
 
-    private String descr;
+    private String description;
 
-    @javax.persistence.Column(name = "DESCR", nullable = true, insertable = true, updatable = true, length = 255, precision = 0)
+    @Column(name = "description", nullable = true, insertable = true, updatable = true, length = 255, precision = 0)
     @Basic
-    public String getDescr() {
-        return descr;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescr(String descr) {
-        this.descr = descr;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
-    public boolean equals(java.lang.Object o) {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EntityObject object = (EntityObject) o;
+        EntityObject that = (EntityObject) o;
 
-        if (descr != null ? !descr.equals(object.descr) : object.descr != null) return false;
-        if (name != null ? !name.equals(object.name) : object.name != null) return false;
-        if (objectId != null ? !objectId.equals(object.objectId) : object.objectId != null) return false;
-        if (orderNumber != null ? !orderNumber.equals(object.orderNumber) : object.orderNumber != null) return false;
+        if (!objectId.equals(that.getObjectId())) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = objectId != null ? objectId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (orderNumber != null ? orderNumber.hashCode() : 0);
-        result = 31 * result + (descr != null ? descr.hashCode() : 0);
-        return result;
+        return objectId.hashCode();
     }
 
     private Collection<Grant> userGrants;

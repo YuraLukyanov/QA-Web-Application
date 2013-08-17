@@ -10,12 +10,12 @@ import java.util.Collection;
  * Time: 16:16
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "ATTRIBUTES", schema = "DB_ALEX", catalog = "")
+@Table(name = "ATTRIBUTES", schema = "system", catalog = "")
 @Entity
 public class Attribute {
     private Integer attrId;
 
-    @javax.persistence.Column(name = "ATTR_ID", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @Column(name = "ATTR_ID", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Id
     public Integer getAttrId() {
         return attrId;
@@ -27,7 +27,7 @@ public class Attribute {
 
     private String name;
 
-    @javax.persistence.Column(name = "NAME", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Column(name = "NAME", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     @Basic
     public String getName() {
         return name;
@@ -39,7 +39,7 @@ public class Attribute {
 
     private String properties;
 
-    @javax.persistence.Column(name = "PROPERTIES", nullable = true, insertable = true, updatable = true, length = 1024, precision = 0)
+    @Column(name = "PROPERTIES", nullable = true, insertable = true, updatable = true, length = 1024, precision = 0)
     @Basic
     public String getProperties() {
         return properties;
@@ -51,7 +51,7 @@ public class Attribute {
 
     private Integer flags;
 
-    @javax.persistence.Column(name = "FLAGS", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
+    @Column(name = "FLAGS", nullable = true, insertable = true, updatable = true, length = 10, precision = 0)
     @Basic
     public Integer getFlags() {
         return flags;
@@ -61,6 +61,18 @@ public class Attribute {
         this.flags = flags;
     }
 
+    private String description;
+
+    @Column(name = "DESCRIPTION", nullable = true, insertable = true, updatable = true, length = 1000, precision = 0)
+    @Basic
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,27 +80,20 @@ public class Attribute {
 
         Attribute attribute = (Attribute) o;
 
-        if (attrId != null ? !attrId.equals(attribute.attrId) : attribute.attrId != null) return false;
-        if (flags != null ? !flags.equals(attribute.flags) : attribute.flags != null) return false;
-        if (name != null ? !name.equals(attribute.name) : attribute.name != null) return false;
-        if (properties != null ? !properties.equals(attribute.properties) : attribute.properties != null) return false;
+        if (!attrId.equals(attribute.getAttrId())) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = attrId != null ? attrId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        result = 31 * result + (flags != null ? flags.hashCode() : 0);
-        return result;
+        return attrId.hashCode();
     }
 
     private AttrType attrType;
 
     @ManyToOne
-    @javax.persistence.JoinColumn(name = "ATTR_TYPE_ID", referencedColumnName = "TYPE_ID", nullable = false)
+    @JoinColumn(name = "ATTR_TYPE_ID", referencedColumnName = "TYPE_ID", nullable = false)
     public AttrType getAttrType() {
         return attrType;
     }

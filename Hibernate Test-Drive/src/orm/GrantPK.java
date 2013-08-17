@@ -77,14 +77,12 @@ public class GrantPK implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GrantPK grantPK = (GrantPK) o;
+        Grant grant = (Grant) o;
 
-        if (attrId != null ? !attrId.equals(grantPK.attrId) : grantPK.attrId != null) return false;
-        if (grants != null ? !grants.equals(grantPK.grants) : grantPK.grants != null) return false;
-        if (objectId != null ? !objectId.equals(grantPK.objectId) : grantPK.objectId != null) return false;
-        if (objectTypeId != null ? !objectTypeId.equals(grantPK.objectTypeId) : grantPK.objectTypeId != null)
-            return false;
-        if (userId != null ? !userId.equals(grantPK.userId) : grantPK.userId != null) return false;
+        if (attrId != null ? !attrId.equals(grant.getAttrId()) : grant.getAttrId() != null) return false;
+        if (objectId != null ? !objectId.equals(grant.getObjectId()) : grant.getObjectId() != null) return false;
+        if (objectTypeId != null ? !objectTypeId.equals(grant.getObjectTypeId()) : grant.getObjectTypeId() != null) return false;
+        if (!userId.equals(grant.getUserId())) return false;
 
         return true;
     }
@@ -94,8 +92,7 @@ public class GrantPK implements Serializable {
         int result = objectId != null ? objectId.hashCode() : 0;
         result = 31 * result + (attrId != null ? attrId.hashCode() : 0);
         result = 31 * result + (objectTypeId != null ? objectTypeId.hashCode() : 0);
-        result = 31 * result + (grants != null ? grants.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + userId.hashCode();
         return result;
     }
 }

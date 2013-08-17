@@ -1,9 +1,6 @@
 package orm;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 
 /**
@@ -13,12 +10,12 @@ import java.util.Collection;
  * Time: 16:16
  * To change this template use File | Settings | File Templates.
  */
-@javax.persistence.Table(name = "ATTR_TYPES", schema = "DB_ALEX", catalog = "")
+@Table(name = "ATTR_TYPES", schema = "system", catalog = "")
 @Entity
 public class AttrType {
     private Integer typeId;
 
-    @javax.persistence.Column(name = "TYPE_ID", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
+    @Column(name = "TYPE_ID", nullable = false, insertable = true, updatable = true, length = 20, precision = 0)
     @Id
     public Integer getTypeId() {
         return typeId;
@@ -30,7 +27,7 @@ public class AttrType {
 
     private String name;
 
-    @javax.persistence.Column(name = "NAME", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
+    @Column(name = "NAME", nullable = false, insertable = true, updatable = true, length = 255, precision = 0)
     @Basic
     public String getName() {
         return name;
@@ -42,7 +39,7 @@ public class AttrType {
 
     private String descr;
 
-    @javax.persistence.Column(name = "DESCR", nullable = true, insertable = true, updatable = true, length = 255, precision = 0)
+    @Column(name = "DESCR", nullable = true, insertable = true, updatable = true, length = 255, precision = 0)
     @Basic
     public String getDescr() {
         return descr;
@@ -59,19 +56,14 @@ public class AttrType {
 
         AttrType attrType = (AttrType) o;
 
-        if (descr != null ? !descr.equals(attrType.descr) : attrType.descr != null) return false;
-        if (name != null ? !name.equals(attrType.name) : attrType.name != null) return false;
-        if (typeId != null ? !typeId.equals(attrType.typeId) : attrType.typeId != null) return false;
+        if (!typeId.equals(attrType.getTypeId())) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = typeId != null ? typeId.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (descr != null ? descr.hashCode() : 0);
-        return result;
+        return typeId.hashCode();
     }
 
     private Collection<Attribute> attributesByTypeId;
