@@ -3,7 +3,6 @@ package orm;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.lang.*;
 
 /**
  * Created with IntelliJ IDEA.

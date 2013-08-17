@@ -3,11 +3,7 @@ package orm.main;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-/**
- * 26.07.2009 20:27:43
- *
- * @author ctapobep
- */
+
 public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
