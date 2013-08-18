@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile="d:/Programming/QA Web Appl/MetamodelWebApp/ojdbc6-11.2.0.3.jar" -DgroupId=oracle.jdbc -DartifactId=ojdbc6 -Dversion=11.2.0.3 -Dpackaging=jar -DlocalRepositoryPath="d:/Programming/QA Web Appl/MetamodelWebApp/localRepository"
